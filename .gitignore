@@ -1,0 +1,31 @@
+# Dependency and build directories
+target/
+*.jar
+*.war
+*.nar
+*.ear
+
+# Logs and outputs
+*.log
+out.txt
+build.log
+
+# IDEs
+.vscode/
+.idea/
+*.iws
+*.iml
+*.ipr
+.settings/
+.project
+.classpath
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Keep workspace clean from duplicate archives
+rentalhouse_backend-main/
+rentalhouse_frontend-main/
+application.properties
