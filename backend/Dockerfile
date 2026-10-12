@@ -2,23 +2,23 @@
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Cache dependencies
+# Cache Maven dependencies
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
 
-# Copy source code and package
+# Copy backend source code and build package
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Stage 2: Runtime environment
+# Stage 2: Containerized runtime environment
 FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
-# Copy the built jar
 COPY --from=build /app/target/*.jar app.jar
 
-# Render exposes PORT dynamically via environment variable
+# Render assigns PORT dynamically; default to 8080
 ENV PORT=8080
 EXPOSE 8080
 
-ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT} -jar app.jar"]
+# Configure container memory limits and bind to 0.0.0.0:$PORT
+ENTRYPOINT ["sh", "-c", "java -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -Dserver.port=${PORT:-8080} -Dserver.address=0.0.0.0 -jar app.jar"]

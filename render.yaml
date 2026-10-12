@@ -6,6 +6,9 @@ services:
     dockerContext: .
     plan: free
     region: oregon
+    branch: main
+    autoDeploy: true
+    healthCheckPath: /health
     envVars:
       - key: PORT
         value: 8080

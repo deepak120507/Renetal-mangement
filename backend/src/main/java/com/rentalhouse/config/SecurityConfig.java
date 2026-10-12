@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .authenticationProvider(provider)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                    .requestMatchers("/", "/index.html", "/css/**", "/js/**", "/favicon.ico", "/error").permitAll()
+                    .requestMatchers("/", "/health", "/actuator/**", "/index.html", "/css/**", "/js/**", "/favicon.ico", "/error").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/properties", "/api/properties/**").permitAll()
                         .anyRequest().authenticated())

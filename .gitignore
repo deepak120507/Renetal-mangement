@@ -28,4 +28,4 @@ ehthumbs.db
 # Keep workspace clean from duplicate archives
 rentalhouse_backend-main/
 rentalhouse_frontend-main/
-application.properties
+/application.properties
